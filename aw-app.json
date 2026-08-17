@@ -1,0 +1,90 @@
+{
+  "manifest_version": 1,
+  "id": "google-maps",
+  "name": "Google Maps",
+  "version": "0.1.0",
+  "description": "Ports agentic-workspace's aw-google-maps MCP into aw-workspace: place search with ratings, reviews, price level and opening hours (the Yelp-shaped question — 'a good sushi place near here, open now'), plus full place details, address geocoding and live-traffic route ETAs. Google Maps Platform via a plain API key — no OAuth, no consent screen, nothing that expires.",
+  "icon": "map-pin",
+  "tier": "inprocess",
+  "requires_ui_refresh": true,
+  "category": "Integrations",
+  "publisher": "TekFlox",
+  "resource_estimate": {
+    "cpu": "low",
+    "memory": "low",
+    "disk": "low"
+  },
+  "runtime": {
+    "python": ">=3.11",
+    "entrypoint": "google_maps_app.plugin:GoogleMapsAppPlugin",
+    "pip_requires": []
+  },
+  "permissions": [
+    "routes:register",
+    "secrets:own",
+    "net:outbound"
+  ],
+  "contributes": {
+    "routes": [
+      {
+        "prefix": "/api/apps/google-maps"
+      }
+    ],
+    "windows": [
+      {
+        "id": "google-maps.main",
+        "title": "Google Maps",
+        "icon": "map-pin",
+        "body": {
+          "type": "declarative",
+          "spec": "windows/main.json"
+        }
+      }
+    ],
+    "settings_panels": [
+      {
+        "id": "google-maps.settings",
+        "window": "google-maps.main"
+      }
+    ],
+    "mcp": {
+      "reload_on_save": false,
+      "provides": [
+        "search_places",
+        "get_place_details",
+        "geocode_address",
+        "get_route_eta"
+      ]
+    },
+    "skills": [
+      {
+        "id": "aw-google-maps",
+        "path": "skills/aw-google-maps/SKILL.md",
+        "description": "Place search, place details, geocoding and route ETAs through this app's aw-google-maps MCP server — which tool answers which question, the two-step search→details flow, and the three Google APIs the key must have enabled."
+      }
+    ]
+  },
+  "config_schema": {
+    "type": "object",
+    "properties": {
+      "google_maps_api_key": {
+        "type": "string",
+        "x-secret": true,
+        "description": "Google Maps Platform API key. Routed to the zero-knowledge secret store via POST /api/apps/google-maps/settings — never stored in plain config, unlike the monolith which kept it inline in src/config/mcp.json. The key needs three APIs enabled on its project: Places API (New), Geocoding API and Routes API."
+      }
+    },
+    "required": []
+  },
+  "dependencies": {
+    "apps": [
+      {
+        "id": "mcp-gateway",
+        "version": ">=0.1.0",
+        "required": true,
+        "reason": "This app contributes an mcp.json entry (the 'aw-google-maps' server) that MCP Gateway discovers and merges; without the gateway no agent can reach its tools."
+      }
+    ],
+    "note": "Runtime-enforced app dependency: aw-workspace loads mcp-gateway before this app so the gateway can scan google-maps/mcp.json."
+  },
+  "migrations": {}
+}
