@@ -2,8 +2,8 @@
   "manifest_version": 1,
   "id": "google-maps",
   "name": "Google Maps",
-  "version": "0.1.0",
-  "description": "Ports agentic-workspace's aw-google-maps MCP into aw-workspace: place search with ratings, reviews, price level and opening hours (the Yelp-shaped question — 'a good sushi place near here, open now'), plus full place details, address geocoding and live-traffic route ETAs. Google Maps Platform via a plain API key — no OAuth, no consent screen, nothing that expires.",
+  "version": "0.2.0",
+  "description": "Ports agentic-workspace's aw-google-maps MCP into aw-workspace: place search with ratings, reviews, price level and opening hours (the Yelp-shaped question \u2014 'a good sushi place near here, open now'), plus full place details, address geocoding and live-traffic route ETAs. Google Maps Platform via a plain API key \u2014 no OAuth, no consent screen, nothing that expires.",
   "icon": "map-pin",
   "tier": "inprocess",
   "requires_ui_refresh": true,
@@ -60,7 +60,7 @@
       {
         "id": "aw-google-maps",
         "path": "skills/aw-google-maps/SKILL.md",
-        "description": "Place search, place details, geocoding and route ETAs through this app's aw-google-maps MCP server — which tool answers which question, the two-step search→details flow, and the three Google APIs the key must have enabled."
+        "description": "Place search, place details, geocoding and route ETAs through this app's aw-google-maps MCP server \u2014 which tool answers which question, the two-step search\u2192details flow, and the three Google APIs the key must have enabled."
       }
     ]
   },
@@ -70,7 +70,7 @@
       "google_maps_api_key": {
         "type": "string",
         "x-secret": true,
-        "description": "Google Maps Platform API key. Routed to the zero-knowledge secret store via POST /api/apps/google-maps/settings — never stored in plain config, unlike the monolith which kept it inline in src/config/mcp.json. The key needs three APIs enabled on its project: Places API (New), Geocoding API and Routes API."
+        "description": "Google Maps Platform API key. Routed to the zero-knowledge secret store via POST /api/apps/google-maps/settings \u2014 never stored in plain config, unlike the monolith which kept it inline in src/config/mcp.json. The key needs three APIs enabled on its project: Places API (New), Geocoding API and Routes API."
       }
     },
     "required": []
