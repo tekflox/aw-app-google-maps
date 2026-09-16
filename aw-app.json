@@ -2,7 +2,7 @@
   "manifest_version": 1,
   "id": "google-maps",
   "name": "Google Maps",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Ports agentic-workspace's aw-google-maps MCP into aw-workspace: place search with ratings, reviews, price level and opening hours (the Yelp-shaped question \u2014 'a good sushi place near here, open now'), plus full place details, address geocoding and live-traffic route ETAs. Google Maps Platform via a plain API key \u2014 no OAuth, no consent screen, nothing that expires.",
   "icon": "map-pin",
   "tier": "inprocess",
